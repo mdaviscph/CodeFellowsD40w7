@@ -17,7 +17,6 @@
 		000D13B31BA8807D00D41ABA /* SearchQuestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 000D13B21BA8807D00D41ABA /* SearchQuestionsViewController.m */; };
 		000D13B61BA880A500D41ABA /* UserQuestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 000D13B51BA880A500D41ABA /* UserQuestionsViewController.m */; };
 		000D13B91BA880C800D41ABA /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 000D13B81BA880C800D41ABA /* UserProfileViewController.m */; };
-		000D13BC1BA8824100D41ABA /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 000D13BB1BA8824100D41ABA /* MainMenuViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,8 +49,6 @@
 		000D13B51BA880A500D41ABA /* UserQuestionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserQuestionsViewController.m; sourceTree = "<group>"; };
 		000D13B71BA880C800D41ABA /* UserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileViewController.h; sourceTree = "<group>"; };
 		000D13B81BA880C800D41ABA /* UserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileViewController.m; sourceTree = "<group>"; };
-		000D13BA1BA8824100D41ABA /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
-		000D13BB1BA8824100D41ABA /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,8 +138,6 @@
 				000D13B51BA880A500D41ABA /* UserQuestionsViewController.m */,
 				000D13B71BA880C800D41ABA /* UserProfileViewController.h */,
 				000D13B81BA880C800D41ABA /* UserProfileViewController.m */,
-				000D13BA1BA8824100D41ABA /* MainMenuViewController.h */,
-				000D13BB1BA8824100D41ABA /* MainMenuViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -253,7 +248,6 @@
 				000D13B91BA880C800D41ABA /* UserProfileViewController.m in Sources */,
 				000D13B31BA8807D00D41ABA /* SearchQuestionsViewController.m in Sources */,
 				000D13841BA87ECC00D41ABA /* main.m in Sources */,
-				000D13BC1BA8824100D41ABA /* MainMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,6 +444,7 @@
 				000D13A31BA87ECC00D41ABA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		000D13A41BA87ECC00D41ABA /* Build configuration list for PBXNativeTarget "StackOverflowClientTests" */ = {
 			isa = XCConfigurationList;
@@ -458,6 +453,7 @@
 				000D13A61BA87ECC00D41ABA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

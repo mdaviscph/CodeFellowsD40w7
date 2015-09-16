@@ -13,8 +13,10 @@
 
 static const CGFloat kBurgerButtonWidth = 50;
 static const CGFloat kBurgerButtonHeight = 50;
-static const NSTimeInterval kDefaultAnimationDuration = 0.3;
-static const CGFloat kBurgerMenuOpenWidthMultiplier = 1.2;
+static const NSTimeInterval kOpenAnimationDuration = 0.3;
+static const NSTimeInterval kCloseAnimationDuration = 0.4;
+static const NSTimeInterval kOffscreenAnimationDuration = 0.5;
+static const CGFloat kBurgerMenuOpenPercent = 0.60;
 
 @interface BurgerMenuViewController () <UITableViewDelegate>
 
@@ -37,7 +39,8 @@ static const CGFloat kBurgerMenuOpenWidthMultiplier = 1.2;
 
 - (NSArray *)menuItemVCs {
   if (!_menuItemVCs) {
-    _menuItemVCs = @[self.searchQuestionsVC, self.userProfileVC, self.userQuestionsVC];
+    // order of VCs must match the order of cells for the static tableViewController in Storyboard
+    _menuItemVCs = @[self.searchQuestionsVC, self.userQuestionsVC, self.userProfileVC];
   }
   return _menuItemVCs;
 }
@@ -76,6 +79,21 @@ static const CGFloat kBurgerMenuOpenWidthMultiplier = 1.2;
   return _burgerButton;
 }
 
+- (UIPanGestureRecognizer *)panRecognizer {
+  if (!_panRecognizer) {
+    _panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(topVCpanned:)];
+  }
+  return _panRecognizer;
+}
+
+- (UITapGestureRecognizer *)tapRecognizer {
+  if (!_tapRecognizer) {
+    _tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(topVCtapped:)];
+  }
+  return _tapRecognizer;
+}
+
+#pragma mark - Lifecycle Methods
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -89,9 +107,7 @@ static const CGFloat kBurgerMenuOpenWidthMultiplier = 1.2;
   [self.burgerButton setImage:[UIImage imageNamed:@"burger"] forState:UIControlStateNormal];
   [self.topVC.view addSubview:self.burgerButton];
   [self.burgerButton addTarget:self action:@selector(burgerButtonUp:) forControlEvents:UIControlEventTouchUpInside];
-  self.panRecognizer = [self addPanGRwithSelfAsTarger:self.topVC];
-
-
+  [self.topVC.view addGestureRecognizer:self.panRecognizer];
 }
 
 #pragma mark - Helper Methods
@@ -108,30 +124,29 @@ static const CGFloat kBurgerMenuOpenWidthMultiplier = 1.2;
   [childVC removeFromParentViewController];
 }
 
-- (UIPanGestureRecognizer *)addPanGRwithSelfAsTarger:(UIViewController *)childVC {
-  UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(topVCpan:)];
-  [childVC.view addGestureRecognizer:panRecognizer];
-  return panRecognizer;
+- (void)openBurgerMenu {
+  [UIView animateWithDuration:kOpenAnimationDuration animations:^{
+    self.topVC.view.center = [self centerOfOpenVC:self.topVC];
+  } completion:^(BOOL finished) {
+    [self.topVC.view addGestureRecognizer:self.tapRecognizer];
+    self.burgerButton.userInteractionEnabled = NO;
+  } ];
 }
-- (UITapGestureRecognizer *)addTapGRwithSelfAsTarger:(UIViewController *)childVC {
-  UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(topVCtap:)];
-  [childVC.view addGestureRecognizer:tapRecognizer];
-  return tapRecognizer;
-}
-
-- (void)removePanGR:(UIPanGestureRecognizer *)gestureRecognizer from:(UIViewController *)childVC {
-  [childVC.view removeGestureRecognizer:gestureRecognizer];
-}
-- (void)removeTapGR:(UITapGestureRecognizer *)gestureRecognizer from:(UIViewController *)childVC {
-  [childVC.view removeGestureRecognizer:gestureRecognizer];
+-(void)closeBurgerMenu {
+  [UIView animateWithDuration:kCloseAnimationDuration animations:^{
+    self.topVC.view.center = self.view.center;
+  } completion:^(BOOL finished) {
+    [self.topVC.view removeGestureRecognizer:self.tapRecognizer];
+    self.burgerButton.userInteractionEnabled = YES;
+  }];
 }
 
 #pragma mark - Selectors
 - (void)burgerButtonUp:(UIButton *)sender {
-  
+  [self openBurgerMenu];
 }
 
-- (void)topVCpan:(UIPanGestureRecognizer *)sender {
+- (void)topVCpanned:(UIPanGestureRecognizer *)sender {
   
   CGFloat xTranslation = [sender translationInView:self.topVC.view].x;
   CGFloat xVelocity = [sender velocityInView:self.topVC.view].x;
@@ -144,33 +159,44 @@ static const CGFloat kBurgerMenuOpenWidthMultiplier = 1.2;
       break;
     case UIGestureRecognizerStateEnded:
       if (self.topVC.view.center.x != [self centerOfOpenVC:self.topVC].x) {
-        [UIView animateWithDuration:kDefaultAnimationDuration animations:^{
-          self.topVC.view.center = [self centerOfOpenVC:self.topVC];
-        } completion:^(BOOL finished) {
-          [self addTapGRwithSelfAsTarger:self.topVC];
-          self.burgerButton.userInteractionEnabled = NO;
-        } ];
+        [self openBurgerMenu];
       }
       break;
     default:
       break;
   }
 }
-- (void)topVCtap:(UITapGestureRecognizer *)sender {
-  [self removeTapGR:[self tapRecognizer] from:self.topVC];
-  self.topVC.view.center = self.view.center;
-  self.burgerButton.userInteractionEnabled = YES;
-  
+- (void)topVCtapped:(UITapGestureRecognizer *)sender {
+  [self closeBurgerMenu];
 }
 
-- (CGPoint)centerOfOpenVC:(UIViewController *)openVC {
-  return CGPointMake(MAX(MIN(self.view.center.x, openVC.view.center.x), openVC.view.frame.size.width * kBurgerMenuOpenWidthMultiplier), openVC.view.center.y);
+- (CGPoint)centerOfOpenVC:(UIViewController *)childVC {
+  return CGPointMake(MAX(MIN(self.view.center.x, childVC.view.center.x), self.view.center.x +
+                         childVC.view.frame.size.width * kBurgerMenuOpenPercent), childVC.view.center.y);
+}
+- (CGPoint)centerOfOffscreenVC:(UIViewController *)childVC {
+  return CGPointMake(childVC.view.center.x + childVC.view.frame.size.width, childVC.view.center.y);
 }
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  self.topVC.view.center = self.view.center;
+  [self closeBurgerMenu];
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
+  UIViewController *nextTopVC = self.menuItemVCs[indexPath.row];
+  
+  if (![self.topVC isEqual:nextTopVC]) {
+    [UIView animateWithDuration:kOffscreenAnimationDuration animations:^{
+      self.topVC.view.center = [self centerOfOffscreenVC:self.topVC];
+    } completion:^(BOOL finished) {
+      [self removeChildVC:self.topVC];
+      [self.burgerButton removeFromSuperview];
+      
+      self.topVC = nextTopVC;
+      [self addChildVC:self.topVC];
+      [self.topVC.view addGestureRecognizer:self.panRecognizer];
+      [self.topVC.view addSubview:self.burgerButton];
+    }];
+  }
 }
 @end
