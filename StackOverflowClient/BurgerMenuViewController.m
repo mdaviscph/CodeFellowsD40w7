@@ -15,7 +15,7 @@ static const CGFloat kBurgerButtonWidth = 50;
 static const CGFloat kBurgerButtonHeight = 50;
 static const NSTimeInterval kOpenAnimationDuration = 0.3;
 static const NSTimeInterval kCloseAnimationDuration = 0.4;
-static const NSTimeInterval kOffscreenAnimationDuration = 0.5;
+static const NSTimeInterval kOffscreenAnimationDuration = 0.4;
 static const CGFloat kBurgerMenuOpenPercent = 0.60;
 
 @interface BurgerMenuViewController () <UITableViewDelegate>
@@ -99,10 +99,10 @@ static const CGFloat kBurgerMenuOpenPercent = 0.60;
   [super viewDidLoad];
   
   self.mainMenuVC.tableView.delegate = self;
-  [self addChildVC:self.mainMenuVC];
+  [self addChildVC:self.mainMenuVC onScreen:YES];
   
   self.topVC = self.menuItemVCs.firstObject;
-  [self addChildVC:self.topVC];
+  [self addChildVC:self.topVC onScreen:YES];
 
   [self.burgerButton setImage:[UIImage imageNamed:@"burger"] forState:UIControlStateNormal];
   [self.topVC.view addSubview:self.burgerButton];
@@ -112,9 +112,12 @@ static const CGFloat kBurgerMenuOpenPercent = 0.60;
 
 #pragma mark - Helper Methods
 
-- (void)addChildVC:(UIViewController *)childVC {
+- (void)addChildVC:(UIViewController *)childVC onScreen:(BOOL)onScreen {
   [self addChildViewController:childVC];
   childVC.view.frame = self.view.frame;
+  if (!onScreen) {
+    childVC.view.center = [self centerOfOffscreenVC:childVC];
+  }
   [self.view addSubview:childVC.view];
   [childVC didMoveToParentViewController:self];
 }
@@ -193,9 +196,14 @@ static const CGFloat kBurgerMenuOpenPercent = 0.60;
       [self.burgerButton removeFromSuperview];
       
       self.topVC = nextTopVC;
-      [self addChildVC:self.topVC];
-      [self.topVC.view addGestureRecognizer:self.panRecognizer];
-      [self.topVC.view addSubview:self.burgerButton];
+      [self addChildVC:self.topVC onScreen:NO];
+      
+      [UIView animateWithDuration:kOpenAnimationDuration animations:^{
+        self.topVC.view.center = self.view.center;
+      } completion:^(BOOL finished) {
+        [self.topVC.view addGestureRecognizer:self.panRecognizer];
+        [self.topVC.view addSubview:self.burgerButton];
+      }];
     }];
   }
 }
