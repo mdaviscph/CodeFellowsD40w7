@@ -12,6 +12,8 @@
 #import "AlertPopover.h"
 
 static NSString *kSearchError = @"Search Error";
+static NSString *kSearchImagesReturned = @"Images Returned";
+static NSString *const kQueueName = @"com.mdaviscph.stackoverflowclient";
 
 @interface SearchQuestionsViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
@@ -19,6 +21,7 @@ static NSString *kSearchError = @"Search Error";
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) NSArray *questions;
+@property (strong, nonatomic) NSMutableDictionary *profileImages;
 
 @end
 
@@ -33,6 +36,13 @@ static NSString *kSearchError = @"Search Error";
   return _questions;
 }
 
+- (void)setProfileImages:(NSMutableDictionary *)profileImages {
+  _profileImages = profileImages;
+  if (_profileImages.count > 0) {
+    [self downloadImages];
+  }
+}
+
 #pragma mark - Lifecycle Methods
 
 - (void)viewDidLoad {
@@ -44,9 +54,26 @@ static NSString *kSearchError = @"Search Error";
   
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
-  [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier: @"Cell"];
   
   self.searchBar.delegate = self;
+}
+
+#pragma mark - Helper Methods
+- (void)downloadImages {
+  dispatch_group_t imagesDispatchGroup = dispatch_group_create();
+  dispatch_queue_t imageQueue = dispatch_queue_create(kQueueName.UTF8String, DISPATCH_QUEUE_CONCURRENT);
+  
+  for (id object in [self.profileImages allKeys]) {
+    dispatch_group_async(imagesDispatchGroup, imageQueue, ^{
+      NSLog(@"[%@]", object);
+      UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:object]]];
+      self.profileImages[object] = image;
+    });
+  }
+  dispatch_group_notify(imagesDispatchGroup, dispatch_get_main_queue(), ^{
+    [AlertPopover alert:kSearchImagesReturned withDescription:@"" controller:self completion:nil];
+    [self.tableView reloadData];
+  });
 }
 
 #pragma mark - UITableViewDataSource
@@ -59,6 +86,10 @@ static NSString *kSearchError = @"Search Error";
   Question *question = self.questions[indexPath.row];
   cell.textLabel.text = question.title;
   cell.detailTextLabel.text = question.displayName;
+  id object = self.profileImages[question.profileImageUrl];
+  if (![object isEqual:[NSNull null]]) {
+    cell.imageView.image = object;
+  }
   return cell;
 }
 
@@ -79,6 +110,15 @@ static NSString *kSearchError = @"Search Error";
   [StackOverflowService search:searchTerm completion:^(NSArray *results, NSError *error) {
     if (results) {
       self.questions = results;
+      // for this exercise we are to download all images at one time, rather than lazy loading,
+      // using a dispatch group
+      NSMutableDictionary *profileImageUrls = [[NSMutableDictionary alloc] init];
+      for (Question * question in self.questions) {
+        if (question.profileImageUrl) {
+          profileImageUrls[question.profileImageUrl] = [NSNull null];
+        }
+      }
+      self.profileImages = profileImageUrls;
       [self.tableView reloadData];
     } else {
       NSString *errorTitle = NSLocalizedString(kSearchError, nil);
