@@ -10,6 +10,7 @@
 #import "SearchQuestionsViewController.h"
 #import "UserProfileViewController.h"
 #import "UserQuestionsViewController.h"
+#import "WebViewController.h"
 
 static const CGFloat kBurgerButtonWidth = 50;
 static const CGFloat kBurgerButtonHeight = 50;
@@ -17,6 +18,8 @@ static const NSTimeInterval kOpenAnimationDuration = 0.3;
 static const NSTimeInterval kCloseAnimationDuration = 0.4;
 static const NSTimeInterval kOffscreenAnimationDuration = 0.4;
 static const CGFloat kBurgerMenuOpenPercent = 0.60;
+static NSString *const kUserDefaultsTokenKey = @"StackOverflowToken";
+static NSString *const kUserDefaultsKeyKey = @"StackOverflowToken";
 
 @interface BurgerMenuViewController () <UITableViewDelegate>
 
@@ -29,8 +32,8 @@ static const CGFloat kBurgerMenuOpenPercent = 0.60;
 @property (strong, nonatomic) UIViewController *topVC;
 @property (strong, nonatomic) UIPanGestureRecognizer *panRecognizer;
 @property (strong, nonatomic) UITapGestureRecognizer *tapRecognizer;
-
 @property (strong, nonatomic) UIButton *burgerButton;
+
 @end
 
 @implementation BurgerMenuViewController
@@ -110,6 +113,12 @@ static const CGFloat kBurgerMenuOpenPercent = 0.60;
   [self.topVC.view addGestureRecognizer:self.panRecognizer];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
+  
+  [self authorizationToken];
+}
+
 #pragma mark - Helper Methods
 
 - (void)addChildVC:(UIViewController *)childVC onScreen:(BOOL)onScreen {
@@ -180,6 +189,19 @@ static const CGFloat kBurgerMenuOpenPercent = 0.60;
 - (CGPoint)centerOfOffscreenVC:(UIViewController *)childVC {
   return CGPointMake(childVC.view.center.x + childVC.view.frame.size.width, childVC.view.center.y);
 }
+
+- (NSString *)authorizationToken {
+  NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsTokenKey];
+  if (token) {
+    return token;
+  }
+  
+  WebViewController *webVC = [[WebViewController alloc] init];
+  [self presentViewController:webVC animated:YES completion:nil];
+  
+  return token = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsTokenKey];
+}
+
 
 #pragma mark - UITableViewDelegate
 

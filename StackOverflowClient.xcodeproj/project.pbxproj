@@ -17,6 +17,12 @@
 		000D13B31BA8807D00D41ABA /* SearchQuestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 000D13B21BA8807D00D41ABA /* SearchQuestionsViewController.m */; };
 		000D13B61BA880A500D41ABA /* UserQuestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 000D13B51BA880A500D41ABA /* UserQuestionsViewController.m */; };
 		000D13B91BA880C800D41ABA /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 000D13B81BA880C800D41ABA /* UserProfileViewController.m */; };
+		000D13C41BA9E8B600D41ABA /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 000D13C31BA9E8B600D41ABA /* WebViewController.m */; };
+		00B2CE001BAB20A0001FBD11 /* StackOverflowService.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B2CDFF1BAB20A0001FBD11 /* StackOverflowService.m */; settings = {ASSET_TAGS = (); }; };
+		00B2CE051BAB2541001FBD11 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B2CE041BAB2541001FBD11 /* Question.m */; settings = {ASSET_TAGS = (); }; };
+		00B2CE0D1BAB410D001FBD11 /* Keys.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B2CE0C1BAB410D001FBD11 /* Keys.m */; settings = {ASSET_TAGS = (); }; };
+		00B2CE101BABA6C0001FBD11 /* AlertPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B2CE0F1BABA6C0001FBD11 /* AlertPopover.m */; settings = {ASSET_TAGS = (); }; };
+		0E9D579AB1E4CFA860158C79 /* libPods-StackOverflowClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F4E4D8FB93A3B99ED55461A /* libPods-StackOverflowClient.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +55,19 @@
 		000D13B51BA880A500D41ABA /* UserQuestionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserQuestionsViewController.m; sourceTree = "<group>"; };
 		000D13B71BA880C800D41ABA /* UserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileViewController.h; sourceTree = "<group>"; };
 		000D13B81BA880C800D41ABA /* UserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileViewController.m; sourceTree = "<group>"; };
+		000D13C21BA9E8B600D41ABA /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		000D13C31BA9E8B600D41ABA /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		00B2CDFE1BAB20A0001FBD11 /* StackOverflowService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackOverflowService.h; sourceTree = "<group>"; };
+		00B2CDFF1BAB20A0001FBD11 /* StackOverflowService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StackOverflowService.m; sourceTree = "<group>"; };
+		00B2CE031BAB2541001FBD11 /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
+		00B2CE041BAB2541001FBD11 /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
+		00B2CE0B1BAB410D001FBD11 /* Keys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keys.h; sourceTree = "<group>"; };
+		00B2CE0C1BAB410D001FBD11 /* Keys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keys.m; sourceTree = "<group>"; };
+		00B2CE0E1BABA6C0001FBD11 /* AlertPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertPopover.h; sourceTree = "<group>"; };
+		00B2CE0F1BABA6C0001FBD11 /* AlertPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertPopover.m; sourceTree = "<group>"; };
+		143B0DFE078243BC1EA6DA8D /* Pods-StackOverflowClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StackOverflowClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-StackOverflowClient/Pods-StackOverflowClient.release.xcconfig"; sourceTree = "<group>"; };
+		9F4E4D8FB93A3B99ED55461A /* libPods-StackOverflowClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StackOverflowClient.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D42E17AD2D7ED08DB756B462 /* Pods-StackOverflowClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StackOverflowClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StackOverflowClient/Pods-StackOverflowClient.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E9D579AB1E4CFA860158C79 /* libPods-StackOverflowClient.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +95,8 @@
 				000D13801BA87ECC00D41ABA /* StackOverflowClient */,
 				000D139A1BA87ECC00D41ABA /* StackOverflowClientTests */,
 				000D137F1BA87ECC00D41ABA /* Products */,
+				FF568C77F221BD3016B7666E /* Pods */,
+				8A62F8A9DCB5D3EB2C2DD5C6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -91,7 +113,9 @@
 			isa = PBXGroup;
 			children = (
 				000D138B1BA87ECC00D41ABA /* Main.storyboard */,
+				00B2CE061BAB254D001FBD11 /* Model */,
 				000D13A71BA87FC700D41ABA /* Controller */,
+				00B2CE011BAB20AF001FBD11 /* Other */,
 				000D13811BA87ECC00D41ABA /* Supporting Files */,
 			);
 			path = StackOverflowClient;
@@ -138,8 +162,49 @@
 				000D13B51BA880A500D41ABA /* UserQuestionsViewController.m */,
 				000D13B71BA880C800D41ABA /* UserProfileViewController.h */,
 				000D13B81BA880C800D41ABA /* UserProfileViewController.m */,
+				000D13C21BA9E8B600D41ABA /* WebViewController.h */,
+				000D13C31BA9E8B600D41ABA /* WebViewController.m */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		00B2CE011BAB20AF001FBD11 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				00B2CE0E1BABA6C0001FBD11 /* AlertPopover.h */,
+				00B2CE0F1BABA6C0001FBD11 /* AlertPopover.m */,
+				00B2CDFE1BAB20A0001FBD11 /* StackOverflowService.h */,
+				00B2CDFF1BAB20A0001FBD11 /* StackOverflowService.m */,
+				00B2CE0B1BAB410D001FBD11 /* Keys.h */,
+				00B2CE0C1BAB410D001FBD11 /* Keys.m */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		00B2CE061BAB254D001FBD11 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				00B2CE031BAB2541001FBD11 /* Question.h */,
+				00B2CE041BAB2541001FBD11 /* Question.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		8A62F8A9DCB5D3EB2C2DD5C6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9F4E4D8FB93A3B99ED55461A /* libPods-StackOverflowClient.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FF568C77F221BD3016B7666E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D42E17AD2D7ED08DB756B462 /* Pods-StackOverflowClient.debug.xcconfig */,
+				143B0DFE078243BC1EA6DA8D /* Pods-StackOverflowClient.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,9 +214,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 000D13A11BA87ECC00D41ABA /* Build configuration list for PBXNativeTarget "StackOverflowClient" */;
 			buildPhases = (
+				CE66DCC0A171E7BDD3D9EFA1 /* Check Pods Manifest.lock */,
 				000D137A1BA87ECC00D41ABA /* Sources */,
 				000D137B1BA87ECC00D41ABA /* Frameworks */,
 				000D137C1BA87ECC00D41ABA /* Resources */,
+				0D3C30845E91180798E7D987 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -186,7 +253,7 @@
 		000D13761BA87ECC00D41ABA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "mike davis";
 				TargetAttributes = {
 					000D137D1BA87ECC00D41ABA = {
@@ -237,15 +304,53 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0D3C30845E91180798E7D987 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StackOverflowClient/Pods-StackOverflowClient-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE66DCC0A171E7BDD3D9EFA1 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		000D137A1BA87ECC00D41ABA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				000D138A1BA87ECC00D41ABA /* BurgerMenuViewController.m in Sources */,
+				00B2CE101BABA6C0001FBD11 /* AlertPopover.m in Sources */,
+				000D13C41BA9E8B600D41ABA /* WebViewController.m in Sources */,
 				000D13B61BA880A500D41ABA /* UserQuestionsViewController.m in Sources */,
 				000D13871BA87ECC00D41ABA /* AppDelegate.m in Sources */,
+				00B2CE001BAB20A0001FBD11 /* StackOverflowService.m in Sources */,
+				00B2CE0D1BAB410D001FBD11 /* Keys.m in Sources */,
 				000D13B91BA880C800D41ABA /* UserProfileViewController.m in Sources */,
+				00B2CE051BAB2541001FBD11 /* Question.m in Sources */,
 				000D13B31BA8807D00D41ABA /* SearchQuestionsViewController.m in Sources */,
 				000D13841BA87ECC00D41ABA /* main.m in Sources */,
 			);
@@ -310,6 +415,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -373,20 +479,24 @@
 		};
 		000D13A21BA87ECC00D41ABA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D42E17AD2D7ED08DB756B462 /* Pods-StackOverflowClient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = StackOverflowClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mdaviscph.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
 		000D13A31BA87ECC00D41ABA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 143B0DFE078243BC1EA6DA8D /* Pods-StackOverflowClient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = StackOverflowClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mdaviscph.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -405,6 +515,7 @@
 				);
 				INFOPLIST_FILE = StackOverflowClientTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mdaviscph.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StackOverflowClient.app/StackOverflowClient";
 			};
@@ -420,6 +531,7 @@
 				);
 				INFOPLIST_FILE = StackOverflowClientTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mdaviscph.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StackOverflowClient.app/StackOverflowClient";
 			};
