@@ -15,9 +15,8 @@ static NSString *kSearchError = @"Search Error";
 
 @interface SearchQuestionsViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
-@property (strong, nonatomic) UISearchController *searchController;
-@property (strong, nonatomic) UITableViewController *tableController;
-@property (weak, nonatomic) IBOutlet UIView *searchBarView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) NSArray *questions;
 
@@ -26,20 +25,6 @@ static NSString *kSearchError = @"Search Error";
 @implementation SearchQuestionsViewController
 
 #pragma mark - Private Properties Getters, Setters
-
-- (UISearchController *)searchController {
-  if (!_searchController) {
-    _searchController = [[UISearchController alloc] initWithSearchResultsController:_tableController];
-  }
-  return _searchController;
-}
-
-- (UITableViewController *)tableController {
-  if (!_tableController) {
-    _tableController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
-  }
-  return _tableController;
-}
 
 - (NSArray *)questions {
   if (!_questions) {
@@ -54,16 +39,14 @@ static NSString *kSearchError = @"Search Error";
   [super viewDidLoad];
   NSLog(@"vDL SearchQuestionsViewController");
 
-  self.tableController.tableView.frame = self.view.frame;
-  [self.searchController.searchBar sizeToFit];
-  self.searchController.searchBar.placeholder = @"Search title";
-  [self.searchBarView addSubview:self.searchController.searchBar];
+  self.searchBar.placeholder = @"Search title";
+  [self.searchBar becomeFirstResponder];
   
-  self.tableController.tableView.delegate = self;
-  self.tableController.tableView.dataSource = self;
-  [self.tableController.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier: @"Cell"];
+  self.tableView.delegate = self;
+  self.tableView.dataSource = self;
+  [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier: @"Cell"];
   
-  self.searchController.searchBar.delegate = self;
+  self.searchBar.delegate = self;
 }
 
 #pragma mark - UITableViewDataSource
@@ -85,13 +68,10 @@ static NSString *kSearchError = @"Search Error";
 }
 
 #pragma mark - UISearchBarDelegate
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-  [self presentViewController:self.searchController animated:YES completion:nil];
-}
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
   
-  [self.searchController resignFirstResponder];
-  NSString *searchTerm = self.searchController.searchBar.text;
+  [self.searchBar resignFirstResponder];
+  NSString *searchTerm = self.searchBar.text;
   if (!searchTerm || searchTerm.length == 0) {
     return;
   }
@@ -99,7 +79,7 @@ static NSString *kSearchError = @"Search Error";
   [StackOverflowService search:searchTerm completion:^(NSArray *results, NSError *error) {
     if (results) {
       self.questions = results;
-      [self.tableController.tableView reloadData];
+      [self.tableView reloadData];
     } else {
       NSString *errorTitle = NSLocalizedString(kSearchError, nil);
       NSError *reachableError = [StackOverflowService reachableError];
