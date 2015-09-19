@@ -23,6 +23,7 @@
 		00B2CE0D1BAB410D001FBD11 /* Keys.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B2CE0C1BAB410D001FBD11 /* Keys.m */; settings = {ASSET_TAGS = (); }; };
 		00B2CE101BABA6C0001FBD11 /* AlertPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B2CE0F1BABA6C0001FBD11 /* AlertPopover.m */; settings = {ASSET_TAGS = (); }; };
 		00D2D1021BACAA5A00C27701 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D2D1011BACAA5A00C27701 /* User.m */; settings = {ASSET_TAGS = (); }; };
+		00D2D1051BADEA7F00C27701 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D2D1041BADEA7F00C27701 /* Constants.m */; settings = {ASSET_TAGS = (); }; };
 		0E9D579AB1E4CFA860158C79 /* libPods-StackOverflowClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F4E4D8FB93A3B99ED55461A /* libPods-StackOverflowClient.a */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +69,8 @@
 		00B2CE0F1BABA6C0001FBD11 /* AlertPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertPopover.m; sourceTree = "<group>"; };
 		00D2D1001BACAA5A00C27701 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		00D2D1011BACAA5A00C27701 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		00D2D1031BADEA7F00C27701 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		00D2D1041BADEA7F00C27701 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		143B0DFE078243BC1EA6DA8D /* Pods-StackOverflowClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StackOverflowClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-StackOverflowClient/Pods-StackOverflowClient.release.xcconfig"; sourceTree = "<group>"; };
 		9F4E4D8FB93A3B99ED55461A /* libPods-StackOverflowClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StackOverflowClient.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D42E17AD2D7ED08DB756B462 /* Pods-StackOverflowClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StackOverflowClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StackOverflowClient/Pods-StackOverflowClient.debug.xcconfig"; sourceTree = "<group>"; };
@@ -180,6 +183,8 @@
 				00B2CDFF1BAB20A0001FBD11 /* StackOverflowService.m */,
 				00B2CE0B1BAB410D001FBD11 /* Keys.h */,
 				00B2CE0C1BAB410D001FBD11 /* Keys.m */,
+				00D2D1031BADEA7F00C27701 /* Constants.h */,
+				00D2D1041BADEA7F00C27701 /* Constants.m */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -354,6 +359,7 @@
 				000D13871BA87ECC00D41ABA /* AppDelegate.m in Sources */,
 				00B2CE001BAB20A0001FBD11 /* StackOverflowService.m in Sources */,
 				00B2CE0D1BAB410D001FBD11 /* Keys.m in Sources */,
+				00D2D1051BADEA7F00C27701 /* Constants.m in Sources */,
 				000D13B91BA880C800D41ABA /* UserProfileViewController.m in Sources */,
 				00D2D1021BACAA5A00C27701 /* User.m in Sources */,
 				00B2CE051BAB2541001FBD11 /* Question.m in Sources */,

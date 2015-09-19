@@ -11,6 +11,7 @@
 #import "UserProfileViewController.h"
 #import "UserQuestionsViewController.h"
 #import "WebViewController.h"
+#import "Constants.h"
 
 static const CGFloat kBurgerButtonWidth = 50;
 static const CGFloat kBurgerButtonHeight = 50;
@@ -18,9 +19,6 @@ static const NSTimeInterval kOpenAnimationDuration = 0.3;
 static const NSTimeInterval kCloseAnimationDuration = 0.4;
 static const NSTimeInterval kOffscreenAnimationDuration = 0.4;
 static const CGFloat kBurgerMenuOpenPercent = 0.60;
-
-static NSString *const kUserDefaultsTokenKey = @"StackOverflowToken";
-static NSString *const kUserDefaultsKeyKey = @"StackOverflowToken";
 
 static NSString *const kKVOuserProfileUrl = @"profileImageUrl";
 
@@ -117,8 +115,6 @@ static NSString *const kKVOuserProfileUrl = @"profileImageUrl";
   [self.topVC.view addGestureRecognizer:self.panRecognizer];
   
   [self.userProfileVC addObserver:self forKeyPath:kKVOuserProfileUrl options:NSKeyValueObservingOptionNew context:nil];
-  
-  
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -174,7 +170,7 @@ static NSString *const kKVOuserProfileUrl = @"profileImageUrl";
 - (CGPoint)centerOfOffscreenVC:(UIViewController *)childVC {
   return CGPointMake(childVC.view.center.x + childVC.view.frame.size.width, childVC.view.center.y);
 }
-
+// TODO - Use Keychain service to store token
 - (NSString *)authorizationToken {
   NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsTokenKey];
   if (token) {

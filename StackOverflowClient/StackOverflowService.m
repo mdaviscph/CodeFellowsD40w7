@@ -10,11 +10,11 @@
 #import "Question.h"
 #import "User.h"
 #import "Keys.h"
+#import "Constants.h"
 #import <AFNetworking/AFNetworking.h>
 
 static NSString *const kTitleSearch = @"https://api.stackexchange.com/2.2/search?order=desc&sort=activity&intitle=%@&site=stackoverflow&key=%@&access_token=%@";
 static NSString *const kUserDetailSearch = @"https://api.stackexchange.com/2.2/me?order=desc&sort=reputation&site=stackoverflow&key=%@&access_token=%@";
-static NSString *const kUserDefaultsTokenKey = @"StackOverflowToken"; //TODO switch to KeyChain
 static NSString *const domain = @"com.mdaviscph.stackoverflowclient";
 
 @implementation StackOverflowService

@@ -10,6 +10,7 @@
 #import "Question.h"
 #import "StackOverflowService.h"
 #import "AlertPopover.h"
+#import "Constants.h"
 
 static NSString *kSearchError = @"Search Error";
 static NSString *kSearchImagesReturned = @"Images Returned";
@@ -73,6 +74,8 @@ static NSString *const kQueueName = @"com.mdaviscph.stackoverflowclient.question
   self.tableView.dataSource = self;
   
   self.searchBar.delegate = self;
+  
+  [self titleSearch:[[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsTitleSearchKey]];
 }
 
 #pragma mark - Helper Methods
@@ -102,6 +105,10 @@ static NSString *const kQueueName = @"com.mdaviscph.stackoverflowclient.question
   [StackOverflowService questionSearch:title completion:^(NSArray *results, NSError *error) {
     
     if (results) {
+      
+      // save off last successful title search
+      [[NSUserDefaults standardUserDefaults] setObject:title forKey:kUserDefaultsTitleSearchKey];
+      
       // for this exercise we are to download all images at one time, rather than lazy loading,
       // using a dispatch group
       NSMutableDictionary *profileImageUrls = [[NSMutableDictionary alloc] init];

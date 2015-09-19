@@ -7,6 +7,7 @@
 //
 
 #import "WebViewController.h"
+#import "Constants.h"
 #import <WebKit/WebKit.h>
 
 static NSString *const kURLpathWithToken = @"login_success";
@@ -15,9 +16,6 @@ static NSString *const kStackOverflowClientID = @"5579";
 static NSString *const kStackOverflowRedirectURIschemeAndDomain = @"https://stackexchange.com";
 static NSString *const kStackOverflowRedirectURIpath = @"/oauth/login_success";
 static NSString *const kStackOverflowURLformat = @"%@?client_id=%@&redirect_uri=%@%@";
-
-// TODO - use Keychain service instead of userdefaults
-static NSString *const kUserDefaultsTokenKey = @"StackOverflowToken";
 
 @interface WebViewController () <WKNavigationDelegate>
 
