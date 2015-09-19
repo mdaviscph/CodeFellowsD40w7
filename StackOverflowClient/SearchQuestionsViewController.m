@@ -29,11 +29,28 @@ static NSString *const kQueueName = @"com.mdaviscph.stackoverflowclient.question
 
 #pragma mark - Private Properties Getters, Setters
 
+@synthesize questions = _questions;
 - (NSArray *)questions {
   if (!_questions) {
     _questions = [[NSArray alloc] init];
   }
   return _questions;
+}
+- (void)setQuestions:(NSArray *)questions {
+  _questions = questions;
+  [self.tableView reloadData];
+}
+
+@synthesize titleSearchTerm = _titleSearchTerm;
+- (NSString *)titleSearchTerm {
+  if (!_titleSearchTerm) {
+    _titleSearchTerm = [[NSString alloc] init];
+  }
+  return _titleSearchTerm;
+}
+- (void)setTitleSearchTerm:(NSString *)titleSearchTerm {
+  _titleSearchTerm = titleSearchTerm;
+  [self titleSearch:titleSearchTerm];
 }
 
 - (void)setProfileImages:(NSMutableDictionary *)profileImages {
@@ -47,9 +64,9 @@ static NSString *const kQueueName = @"com.mdaviscph.stackoverflowclient.question
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  NSLog(@"vDL SearchQuestionsViewController");
+  NSLog(@"vDL Search Questions");
 
-  self.searchBar.placeholder = @"Search title";
+  self.searchBar.placeholder = NSLocalizedString(@"Search title", nil);
   [self.searchBar becomeFirstResponder];
   
   self.tableView.delegate = self;
@@ -74,6 +91,41 @@ static NSString *const kQueueName = @"com.mdaviscph.stackoverflowclient.question
     [AlertPopover alert:kSearchImagesReturned withDescription:@"" controller:self completion:nil];
     [self.tableView reloadData];
   });
+}
+
+- (void)titleSearch:(NSString *)title {
+  
+  if (!title || title.length == 0) {
+    return;
+  }
+  
+  [StackOverflowService questionSearch:title completion:^(NSArray *results, NSError *error) {
+    
+    if (results) {
+      // for this exercise we are to download all images at one time, rather than lazy loading,
+      // using a dispatch group
+      NSMutableDictionary *profileImageUrls = [[NSMutableDictionary alloc] init];
+      for (Question * question in results) {
+        if (question.profileImageUrl) {
+          profileImageUrls[question.profileImageUrl] = [NSNull null];
+        }
+      }
+      self.profileImages = profileImageUrls;
+      self.questions = results;       // this triggers a tableView reload
+      
+    } else {
+      NSString *errorTitle = NSLocalizedString(kSearchError, nil);
+      NSError *reachableError = [StackOverflowService reachableError];
+      NSString *generalMessage = NSLocalizedString(@"An undefined error occurred. Please try again later.", nil);
+      if (error) {
+        [AlertPopover alert:errorTitle withNSError:[StackOverflowService convertStackOverflowError:error] controller:self completion:nil];
+      } else if (reachableError) {
+        [AlertPopover alert:errorTitle withNSError:reachableError controller:self completion:nil];
+      } else {
+        [AlertPopover alert:errorTitle withDescription:generalMessage controller:self completion:nil];
+      }
+    }
+  }];
 }
 
 #pragma mark - UITableViewDataSource
@@ -102,36 +154,7 @@ static NSString *const kQueueName = @"com.mdaviscph.stackoverflowclient.question
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
   
   [self.searchBar resignFirstResponder];
-  NSString *searchTerm = self.searchBar.text;
-  if (!searchTerm || searchTerm.length == 0) {
-    return;
-  }
-  
-  [StackOverflowService questionSearch:searchTerm completion:^(NSArray *results, NSError *error) {
-    if (results) {
-      self.questions = results;
-      // for this exercise we are to download all images at one time, rather than lazy loading,
-      // using a dispatch group
-      NSMutableDictionary *profileImageUrls = [[NSMutableDictionary alloc] init];
-      for (Question * question in self.questions) {
-        if (question.profileImageUrl) {
-          profileImageUrls[question.profileImageUrl] = [NSNull null];
-        }
-      }
-      self.profileImages = profileImageUrls;
-      [self.tableView reloadData];
-    } else {
-      NSString *errorTitle = NSLocalizedString(kSearchError, nil);
-      NSError *reachableError = [StackOverflowService reachableError];
-      NSString *generalMessage = NSLocalizedString(@"An undefined error occurred. Please try again later.", nil);
-      if (error) {
-        [AlertPopover alert:errorTitle withNSError:[StackOverflowService convertStackOverflowError:error] controller:self completion:nil];
-      } else if (reachableError) {
-        [AlertPopover alert:errorTitle withNSError:reachableError controller:self completion:nil];
-      } else {
-        [AlertPopover alert:errorTitle withDescription:generalMessage controller:self completion:nil];
-      }
-    }
-  }];
+  self.titleSearchTerm = self.searchBar.text;
 }
+
 @end

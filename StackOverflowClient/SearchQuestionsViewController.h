@@ -10,4 +10,6 @@
 
 @interface SearchQuestionsViewController : UIViewController
 
+@property (strong, nonatomic) NSString *titleSearchTerm;
+
 @end

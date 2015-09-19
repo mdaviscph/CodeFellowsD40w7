@@ -17,9 +17,7 @@
   user.userId = [(NSNumber *)jsonDictionary[@"user_id"] stringValue];
   
   NSTimeInterval unixDate = [(NSNumber *)jsonDictionary[@"creation_date"] integerValue];
-  NSLog(@"date unix: %f", unixDate);
   user.creation = [NSDate dateWithTimeIntervalSince1970:unixDate];
-  NSLog(@"date: %@", user.creation);
   
   user.displayName = jsonDictionary[@"display_name"];
   user.profileImageUrl = jsonDictionary[@"profile_image"];

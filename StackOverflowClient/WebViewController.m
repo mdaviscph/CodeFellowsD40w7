@@ -29,6 +29,7 @@ static NSString *const kUserDefaultsTokenKey = @"StackOverflowToken";
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  NSLog(@"vDL Web View");
 
   WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.frame];
   webView.navigationDelegate = self;

@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  NSLog(@"vDL UserQuestionsViewController");
+  NSLog(@"vDL User Questions");
 }
 
 @end

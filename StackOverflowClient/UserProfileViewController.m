@@ -25,8 +25,7 @@ static NSString *const kQueueName = @"com.mdaviscph.stackoverflowclient.user_sea
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @property (strong, nonatomic) User *user;
-@property (strong, nonatomic) UIImage *profileImage;
-@property (strong, nonatomic) NSString *profileImageUrl;
+@property (strong, nonatomic) NSString *profileImageUrl;    // observed with KVO
 
 @end
 
@@ -43,7 +42,12 @@ static NSString *const kQueueName = @"com.mdaviscph.stackoverflowclient.user_sea
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  NSLog(@"vDL UserProfileViewController");
+  NSLog(@"vDL User Profile");
+  
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
   
   [StackOverflowService meSearchWithCompletion:^(User *results, NSError *error) {
     if (results) {

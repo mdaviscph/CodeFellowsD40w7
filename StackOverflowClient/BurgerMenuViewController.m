@@ -18,8 +18,11 @@ static const NSTimeInterval kOpenAnimationDuration = 0.3;
 static const NSTimeInterval kCloseAnimationDuration = 0.4;
 static const NSTimeInterval kOffscreenAnimationDuration = 0.4;
 static const CGFloat kBurgerMenuOpenPercent = 0.60;
+
 static NSString *const kUserDefaultsTokenKey = @"StackOverflowToken";
 static NSString *const kUserDefaultsKeyKey = @"StackOverflowToken";
+
+static NSString *const kKVOuserProfileUrl = @"profileImageUrl";
 
 @interface BurgerMenuViewController () <UITableViewDelegate>
 
@@ -100,6 +103,7 @@ static NSString *const kUserDefaultsKeyKey = @"StackOverflowToken";
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  NSLog(@"vDL Burger Menu");
   
   self.mainMenuVC.tableView.delegate = self;
   [self addChildVC:self.mainMenuVC onScreen:YES];
@@ -111,12 +115,22 @@ static NSString *const kUserDefaultsKeyKey = @"StackOverflowToken";
   [self.topVC.view addSubview:self.burgerButton];
   [self.burgerButton addTarget:self action:@selector(burgerButtonUp:) forControlEvents:UIControlEventTouchUpInside];
   [self.topVC.view addGestureRecognizer:self.panRecognizer];
+  
+  [self.userProfileVC addObserver:self forKeyPath:kKVOuserProfileUrl options:NSKeyValueObservingOptionNew context:nil];
+  
+  
 }
 
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
+  NSLog(@"vDA Burger Menu");
   
   [self authorizationToken];
+}
+
+- (void)dealloc {
+  
+  [self.userProfileVC removeObserver:self forKeyPath:kKVOuserProfileUrl];
 }
 
 #pragma mark - Helper Methods
@@ -153,7 +167,28 @@ static NSString *const kUserDefaultsKeyKey = @"StackOverflowToken";
   }];
 }
 
+- (CGPoint)centerOfOpenVC:(UIViewController *)childVC {
+  return CGPointMake(MAX(MIN(self.view.center.x, childVC.view.center.x), self.view.center.x +
+                         childVC.view.frame.size.width * kBurgerMenuOpenPercent), childVC.view.center.y);
+}
+- (CGPoint)centerOfOffscreenVC:(UIViewController *)childVC {
+  return CGPointMake(childVC.view.center.x + childVC.view.frame.size.width, childVC.view.center.y);
+}
+
+- (NSString *)authorizationToken {
+  NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsTokenKey];
+  if (token) {
+    return token;
+  }
+  
+  WebViewController *webVC = [[WebViewController alloc] init];
+  [self presentViewController:webVC animated:YES completion:nil];
+  
+  return token = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsTokenKey];
+}
+
 #pragma mark - Selectors
+
 - (void)burgerButtonUp:(UIButton *)sender {
   [self openBurgerMenu];
 }
@@ -182,26 +217,22 @@ static NSString *const kUserDefaultsKeyKey = @"StackOverflowToken";
   [self closeBurgerMenu];
 }
 
-- (CGPoint)centerOfOpenVC:(UIViewController *)childVC {
-  return CGPointMake(MAX(MIN(self.view.center.x, childVC.view.center.x), self.view.center.x +
-                         childVC.view.frame.size.width * kBurgerMenuOpenPercent), childVC.view.center.y);
-}
-- (CGPoint)centerOfOffscreenVC:(UIViewController *)childVC {
-  return CGPointMake(childVC.view.center.x + childVC.view.frame.size.width, childVC.view.center.y);
-}
+#pragma mark - KVO
 
-- (NSString *)authorizationToken {
-  NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsTokenKey];
-  if (token) {
-    return token;
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+  if ([keyPath isEqualToString:kKVOuserProfileUrl]) {
+    NSString *profileImageUrl = change[NSKeyValueChangeNewKey];
+    NSLog(@"KVO change new: <%@>", profileImageUrl);
+    
+    dispatch_queue_t imageQueue = dispatch_get_global_queue(QOS_CLASS_UTILITY, 0);
+    dispatch_async(imageQueue, ^{
+      UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:profileImageUrl]]];
+      dispatch_async(dispatch_get_main_queue(), ^{
+        self.userProfileVC.profileImage = image;
+      });
+    });
   }
-  
-  WebViewController *webVC = [[WebViewController alloc] init];
-  [self presentViewController:webVC animated:YES completion:nil];
-  
-  return token = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsTokenKey];
 }
-
 
 #pragma mark - UITableViewDelegate
 
