@@ -22,6 +22,7 @@
 		00B2CE051BAB2541001FBD11 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B2CE041BAB2541001FBD11 /* Question.m */; settings = {ASSET_TAGS = (); }; };
 		00B2CE0D1BAB410D001FBD11 /* Keys.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B2CE0C1BAB410D001FBD11 /* Keys.m */; settings = {ASSET_TAGS = (); }; };
 		00B2CE101BABA6C0001FBD11 /* AlertPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B2CE0F1BABA6C0001FBD11 /* AlertPopover.m */; settings = {ASSET_TAGS = (); }; };
+		00D2D1021BACAA5A00C27701 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D2D1011BACAA5A00C27701 /* User.m */; settings = {ASSET_TAGS = (); }; };
 		0E9D579AB1E4CFA860158C79 /* libPods-StackOverflowClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F4E4D8FB93A3B99ED55461A /* libPods-StackOverflowClient.a */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,8 @@
 		00B2CE0C1BAB410D001FBD11 /* Keys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keys.m; sourceTree = "<group>"; };
 		00B2CE0E1BABA6C0001FBD11 /* AlertPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertPopover.h; sourceTree = "<group>"; };
 		00B2CE0F1BABA6C0001FBD11 /* AlertPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertPopover.m; sourceTree = "<group>"; };
+		00D2D1001BACAA5A00C27701 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		00D2D1011BACAA5A00C27701 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		143B0DFE078243BC1EA6DA8D /* Pods-StackOverflowClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StackOverflowClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-StackOverflowClient/Pods-StackOverflowClient.release.xcconfig"; sourceTree = "<group>"; };
 		9F4E4D8FB93A3B99ED55461A /* libPods-StackOverflowClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StackOverflowClient.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D42E17AD2D7ED08DB756B462 /* Pods-StackOverflowClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StackOverflowClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StackOverflowClient/Pods-StackOverflowClient.debug.xcconfig"; sourceTree = "<group>"; };
@@ -186,6 +189,8 @@
 			children = (
 				00B2CE031BAB2541001FBD11 /* Question.h */,
 				00B2CE041BAB2541001FBD11 /* Question.m */,
+				00D2D1001BACAA5A00C27701 /* User.h */,
+				00D2D1011BACAA5A00C27701 /* User.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -350,6 +355,7 @@
 				00B2CE001BAB20A0001FBD11 /* StackOverflowService.m in Sources */,
 				00B2CE0D1BAB410D001FBD11 /* Keys.m in Sources */,
 				000D13B91BA880C800D41ABA /* UserProfileViewController.m in Sources */,
+				00D2D1021BACAA5A00C27701 /* User.m in Sources */,
 				00B2CE051BAB2541001FBD11 /* Question.m in Sources */,
 				000D13B31BA8807D00D41ABA /* SearchQuestionsViewController.m in Sources */,
 				000D13841BA87ECC00D41ABA /* main.m in Sources */,
@@ -431,7 +437,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -469,7 +475,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class User;
 
 enum StackOverflowErrors {
   ErrorInvalidRequestParameter = 100,
@@ -19,7 +20,8 @@ typedef enum StackOverflowErrors StackOverflowErrors;
 
 @interface StackOverflowService : NSObject
 
-+ (void)search:(NSString *)search completion:(void (^)(NSArray *, NSError*))completion;
++ (void)questionSearch:(NSString *)search completion:(void (^)(NSArray *, NSError *))completion;
++ (void)meSearchWithCompletion:(void (^)(User *, NSError *))completion;
 + (NSError *)reachableError;
 + (NSError *)convertStackOverflowError:(NSError *)soError;
 

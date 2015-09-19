@@ -8,16 +8,18 @@
 
 #import "StackOverflowService.h"
 #import "Question.h"
-#include "Keys.h"
+#import "User.h"
+#import "Keys.h"
 #import <AFNetworking/AFNetworking.h>
 
 static NSString *const kTitleSearch = @"https://api.stackexchange.com/2.2/search?order=desc&sort=activity&intitle=%@&site=stackoverflow&key=%@&access_token=%@";
+static NSString *const kUserDetailSearch = @"https://api.stackexchange.com/2.2/me?order=desc&sort=reputation&site=stackoverflow&key=%@&access_token=%@";
 static NSString *const kUserDefaultsTokenKey = @"StackOverflowToken"; //TODO switch to KeyChain
 static NSString *const domain = @"com.mdaviscph.stackoverflowclient";
 
 @implementation StackOverflowService
 
-+ (void)search:(NSString *)search completion:(void (^)(NSArray *, NSError*))completion {
++ (void)questionSearch:(NSString *)search completion:(void (^)(NSArray *, NSError *))completion {
   
   NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsTokenKey];
 
@@ -53,6 +55,37 @@ static NSString *const domain = @"com.mdaviscph.stackoverflowclient";
     NSLog(@"Request failure: %ld", operation.response.statusCode);
     completion(nil, error);
   }];
+}
+
++ (void)meSearchWithCompletion:(void (^)(User *, NSError *))completion {
+  
+  NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsTokenKey];
+  
+  NSString *url = [NSString stringWithFormat:kUserDetailSearch, kStackOverflowKey, token];
+  NSLog(@"<%@>", url);
+  
+  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+  
+  [manager GET:url parameters:nil
+   
+       success:^(AFHTTPRequestOperation* _Nonnull operation, id _Nonnull responseObject) {
+         
+         User *user;
+         
+         NSDictionary *responseJSON = responseObject;
+         NSArray *itemsJSON = responseJSON[@"items"];
+         if (itemsJSON) {
+           NSLog(@"Request success: %ld items", itemsJSON.count);
+          user = [User createUsingJSON:[itemsJSON firstObject]];
+         }
+         completion(user, nil);
+       }
+   
+       failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+         
+         NSLog(@"Request failure: %ld", operation.response.statusCode);
+         completion(nil, error);
+       }];
 }
 
 + (NSError *)reachableError {

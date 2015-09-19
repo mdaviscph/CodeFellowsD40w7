@@ -13,7 +13,7 @@
 
 static NSString *kSearchError = @"Search Error";
 static NSString *kSearchImagesReturned = @"Images Returned";
-static NSString *const kQueueName = @"com.mdaviscph.stackoverflowclient";
+static NSString *const kQueueName = @"com.mdaviscph.stackoverflowclient.question_search";
 
 @interface SearchQuestionsViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
@@ -65,7 +65,7 @@ static NSString *const kQueueName = @"com.mdaviscph.stackoverflowclient";
   
   for (id object in [self.profileImages allKeys]) {
     dispatch_group_async(imagesDispatchGroup, imageQueue, ^{
-      NSLog(@"[%@]", object);
+      //NSLog(@"[%@]", object);
       UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:object]]];
       self.profileImages[object] = image;
     });
@@ -107,7 +107,7 @@ static NSString *const kQueueName = @"com.mdaviscph.stackoverflowclient";
     return;
   }
   
-  [StackOverflowService search:searchTerm completion:^(NSArray *results, NSError *error) {
+  [StackOverflowService questionSearch:searchTerm completion:^(NSArray *results, NSError *error) {
     if (results) {
       self.questions = results;
       // for this exercise we are to download all images at one time, rather than lazy loading,
