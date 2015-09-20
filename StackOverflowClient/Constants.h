@@ -10,3 +10,4 @@
 
 extern NSString *const kUserDefaultsTokenKey;
 extern NSString *const kUserDefaultsTitleSearchKey;
+extern NSString *const kUserDefaultsCommentSearchKey;

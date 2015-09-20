@@ -25,6 +25,9 @@
 		00D2D1021BACAA5A00C27701 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D2D1011BACAA5A00C27701 /* User.m */; settings = {ASSET_TAGS = (); }; };
 		00D2D1051BADEA7F00C27701 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D2D1041BADEA7F00C27701 /* Constants.m */; settings = {ASSET_TAGS = (); }; };
 		00D2D10B1BAE55D700C27701 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D2D10A1BAE55D700C27701 /* Comment.m */; settings = {ASSET_TAGS = (); }; };
+		00D2D10E1BAE67DD00C27701 /* QuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D2D10D1BAE67DD00C27701 /* QuestionCell.m */; settings = {ASSET_TAGS = (); }; };
+		00D2D1111BAE67F000C27701 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D2D1101BAE67F000C27701 /* CommentCell.m */; settings = {ASSET_TAGS = (); }; };
+		00D2D1151BAE74C500C27701 /* StringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D2D1141BAE74C500C27701 /* StringExtensions.m */; settings = {ASSET_TAGS = (); }; };
 		0E9D579AB1E4CFA860158C79 /* libPods-StackOverflowClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F4E4D8FB93A3B99ED55461A /* libPods-StackOverflowClient.a */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +77,12 @@
 		00D2D1041BADEA7F00C27701 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		00D2D1091BAE55D700C27701 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		00D2D10A1BAE55D700C27701 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		00D2D10C1BAE67DD00C27701 /* QuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionCell.h; sourceTree = "<group>"; };
+		00D2D10D1BAE67DD00C27701 /* QuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionCell.m; sourceTree = "<group>"; };
+		00D2D10F1BAE67F000C27701 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
+		00D2D1101BAE67F000C27701 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
+		00D2D1131BAE74C500C27701 /* StringExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringExtensions.h; sourceTree = "<group>"; };
+		00D2D1141BAE74C500C27701 /* StringExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringExtensions.m; sourceTree = "<group>"; };
 		143B0DFE078243BC1EA6DA8D /* Pods-StackOverflowClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StackOverflowClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-StackOverflowClient/Pods-StackOverflowClient.release.xcconfig"; sourceTree = "<group>"; };
 		9F4E4D8FB93A3B99ED55461A /* libPods-StackOverflowClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StackOverflowClient.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D42E17AD2D7ED08DB756B462 /* Pods-StackOverflowClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StackOverflowClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StackOverflowClient/Pods-StackOverflowClient.debug.xcconfig"; sourceTree = "<group>"; };
@@ -123,6 +132,7 @@
 			children = (
 				000D138B1BA87ECC00D41ABA /* Main.storyboard */,
 				00B2CE061BAB254D001FBD11 /* Model */,
+				00D2D1121BAE67F800C27701 /* View */,
 				000D13A71BA87FC700D41ABA /* Controller */,
 				00B2CE011BAB20AF001FBD11 /* Other */,
 				000D13811BA87ECC00D41ABA /* Supporting Files */,
@@ -203,6 +213,19 @@
 				00D2D10A1BAE55D700C27701 /* Comment.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		00D2D1121BAE67F800C27701 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				00D2D10C1BAE67DD00C27701 /* QuestionCell.h */,
+				00D2D10D1BAE67DD00C27701 /* QuestionCell.m */,
+				00D2D10F1BAE67F000C27701 /* CommentCell.h */,
+				00D2D1101BAE67F000C27701 /* CommentCell.m */,
+				00D2D1131BAE74C500C27701 /* StringExtensions.h */,
+				00D2D1141BAE74C500C27701 /* StringExtensions.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		8A62F8A9DCB5D3EB2C2DD5C6 /* Frameworks */ = {
@@ -362,11 +385,14 @@
 				000D13C41BA9E8B600D41ABA /* WebViewController.m in Sources */,
 				000D13B61BA880A500D41ABA /* CommentsViewController.m in Sources */,
 				000D13871BA87ECC00D41ABA /* AppDelegate.m in Sources */,
+				00D2D10E1BAE67DD00C27701 /* QuestionCell.m in Sources */,
 				00B2CE001BAB20A0001FBD11 /* StackOverflowService.m in Sources */,
+				00D2D1151BAE74C500C27701 /* StringExtensions.m in Sources */,
 				00B2CE0D1BAB410D001FBD11 /* Keys.m in Sources */,
 				00D2D10B1BAE55D700C27701 /* Comment.m in Sources */,
 				00D2D1051BADEA7F00C27701 /* Constants.m in Sources */,
 				000D13B91BA880C800D41ABA /* UserProfileViewController.m in Sources */,
+				00D2D1111BAE67F000C27701 /* CommentCell.m in Sources */,
 				00D2D1021BACAA5A00C27701 /* User.m in Sources */,
 				00B2CE051BAB2541001FBD11 /* Question.m in Sources */,
 				000D13B31BA8807D00D41ABA /* SearchQuestionsViewController.m in Sources */,

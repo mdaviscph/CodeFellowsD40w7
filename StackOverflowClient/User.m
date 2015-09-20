@@ -20,6 +20,7 @@
   user.creation = [NSDate dateWithTimeIntervalSince1970:unixDate];
   
   user.displayName = jsonDictionary[@"display_name"];
+  user.displayName = [user.displayName stringByRemovingPercentEncoding];
   user.profileImageUrl = jsonDictionary[@"profile_image"];
   
   NSDictionary *badgeDictionary = jsonDictionary[@"badge_counts"];

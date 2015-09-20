@@ -15,6 +15,7 @@
   Comment *comment = [[Comment alloc] init];
   
   comment.body = jsonDictionary[@"body"];
+  comment.body = [comment.body stringByRemovingPercentEncoding];
   comment.commentId = [(NSNumber *)jsonDictionary[@"user_id"] stringValue];
   comment.score = [(NSNumber *) jsonDictionary[@"score"] integerValue];
   
@@ -22,6 +23,7 @@
   if (ownerDictionary) {
     comment.userId = [(NSNumber *)ownerDictionary[@"user_id"] stringValue];
     comment.displayName = ownerDictionary[@"display_name"];
+    comment.displayName = [comment.displayName stringByRemovingPercentEncoding];
   }
   return comment;
 }

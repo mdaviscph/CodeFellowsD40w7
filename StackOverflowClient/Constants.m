@@ -8,6 +8,6 @@
 
 #import "Constants.h"
 
-
 NSString *const kUserDefaultsTokenKey = @"StackOverflowToken";
 NSString *const kUserDefaultsTitleSearchKey = @"StackOverflowTitleSearch";
+NSString *const kUserDefaultsCommentSearchKey = @"StackOverflowCommentSearch";

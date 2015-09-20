@@ -7,6 +7,7 @@
 //
 
 #import "CommentsViewController.h"
+#import "CommentCell.h"
 #import "Comment.h"
 #import "StackOverflowService.h"
 #import "AlertPopover.h"
@@ -51,7 +52,6 @@ static NSString *kCommentSearchError = @"Comment Search Error";
   [self commentSearch:commentSearchTerm];
 }
 
-
 #pragma mark - Lifecycle Methods
 
 - (void)viewDidLoad {
@@ -63,8 +63,15 @@ static NSString *kCommentSearchError = @"Comment Search Error";
   
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
+  self.tableView.estimatedRowHeight = self.tableView.rowHeight;
+  self.tableView.rowHeight = UITableViewAutomaticDimension;
   
   self.searchBar.delegate = self;
+  NSString *previousSearch = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsCommentSearchKey];
+  if (previousSearch) {
+    self.searchBar.text = previousSearch;
+    self.commentSearchTerm = previousSearch;
+  }
 }
 
 #pragma mark - Helper Methods
@@ -78,6 +85,10 @@ static NSString *kCommentSearchError = @"Comment Search Error";
   [StackOverflowService commentSearch:userId completion:^(NSArray *results, NSError *error) {
     
     if (results) {
+      
+      // save off last successful title search
+      [[NSUserDefaults standardUserDefaults] setObject:userId forKey:kUserDefaultsCommentSearchKey];
+
       self.comments = results;       // this triggers a tableView reload
       
     } else {
@@ -101,10 +112,10 @@ static NSString *kCommentSearchError = @"Comment Search Error";
   return self.comments.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+  CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
   
-  Comment *comment = self.comments[indexPath.row];
-  cell.textLabel.text = comment.body;
+  cell.comment = self.comments[indexPath.row];
+
   return cell;
 }
 

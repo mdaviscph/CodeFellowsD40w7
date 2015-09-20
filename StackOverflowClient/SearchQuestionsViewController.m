@@ -7,6 +7,7 @@
 //
 
 #import "SearchQuestionsViewController.h"
+#import "QuestionCell.h"
 #import "Question.h"
 #import "StackOverflowService.h"
 #import "AlertPopover.h"
@@ -72,10 +73,15 @@ static NSString *const kQueueName = @"com.mdaviscph.stackoverflowclient.question
   
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
+  self.tableView.estimatedRowHeight = self.tableView.rowHeight;
+  self.tableView.rowHeight = UITableViewAutomaticDimension;
   
   self.searchBar.delegate = self;
-  
-  [self titleSearch:[[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsTitleSearchKey]];
+  NSString *previousSearch = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsTitleSearchKey];
+  if (previousSearch) {
+    self.searchBar.text = previousSearch;
+    self.titleSearchTerm = previousSearch;
+  }
 }
 
 #pragma mark - Helper Methods
@@ -141,14 +147,13 @@ static NSString *const kQueueName = @"com.mdaviscph.stackoverflowclient.question
   return self.questions.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+  QuestionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QuestionCell" forIndexPath:indexPath];
   
-  Question *question = self.questions[indexPath.row];
-  cell.textLabel.text = question.title;
-  cell.detailTextLabel.text = [NSString stringWithFormat:@"%@  (%@)", question.displayName, question.userId];
-  id object = self.profileImages[question.profileImageUrl];
+  cell.question = self.questions[indexPath.row];
+  
+  id object = self.profileImages[[self.questions[indexPath.row] profileImageUrl]];
   if (![object isEqual:[NSNull null]]) {
-    cell.imageView.image = object;
+    cell.profileImage = object;
   }
   return cell;
 }
