@@ -10,6 +10,6 @@
 
 @interface UserProfileViewController : UIViewController
 
-@property (strong, nonatomic) UIImage *profileImage;    // set from burgerVC as a result of KVO
+@property (retain, nonatomic) UIImage *profileImage;    // set from burgerVC as a result of KVO
 
 @end

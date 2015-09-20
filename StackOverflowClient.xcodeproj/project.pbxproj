@@ -16,7 +16,7 @@
 		000D139E1BA87ECC00D41ABA /* StackOverflowClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 000D139D1BA87ECC00D41ABA /* StackOverflowClientTests.m */; };
 		000D13B31BA8807D00D41ABA /* SearchQuestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 000D13B21BA8807D00D41ABA /* SearchQuestionsViewController.m */; };
 		000D13B61BA880A500D41ABA /* UserQuestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 000D13B51BA880A500D41ABA /* UserQuestionsViewController.m */; };
-		000D13B91BA880C800D41ABA /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 000D13B81BA880C800D41ABA /* UserProfileViewController.m */; };
+		000D13B91BA880C800D41ABA /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 000D13B81BA880C800D41ABA /* UserProfileViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		000D13C41BA9E8B600D41ABA /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 000D13C31BA9E8B600D41ABA /* WebViewController.m */; };
 		00B2CE001BAB20A0001FBD11 /* StackOverflowService.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B2CDFF1BAB20A0001FBD11 /* StackOverflowService.m */; settings = {ASSET_TAGS = (); }; };
 		00B2CE051BAB2541001FBD11 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B2CE041BAB2541001FBD11 /* Question.m */; settings = {ASSET_TAGS = (); }; };
