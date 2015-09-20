@@ -8,12 +8,14 @@
 
 #import "StackOverflowService.h"
 #import "Question.h"
+#import "Comment.h"
 #import "User.h"
 #import "Keys.h"
 #import "Constants.h"
 #import <AFNetworking/AFNetworking.h>
 
-static NSString *const kTitleSearch = @"https://api.stackexchange.com/2.2/search?order=desc&sort=activity&intitle=%@&site=stackoverflow&key=%@&access_token=%@";
+static NSString *const kTitleQuestionSearch = @"https://api.stackexchange.com/2.2/search?order=desc&sort=activity&intitle=%@&site=stackoverflow&key=%@&access_token=%@";
+static NSString *const kCommentSearch = @"https://api.stackexchange.com/2.2/users/%@/comments?order=desc&sort=creation&site=stackoverflow&filter=!9YdnSNNBB&key=%@&access_token=%@";
 static NSString *const kUserDetailSearch = @"https://api.stackexchange.com/2.2/me?order=desc&sort=reputation&site=stackoverflow&key=%@&access_token=%@";
 static NSString *const domain = @"com.mdaviscph.stackoverflowclient";
 
@@ -23,7 +25,7 @@ static NSString *const domain = @"com.mdaviscph.stackoverflowclient";
   
   NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsTokenKey];
 
-  NSString *url = [NSString stringWithFormat:kTitleSearch, search, kStackOverflowKey, token];
+  NSString *url = [NSString stringWithFormat:kTitleQuestionSearch, search, kStackOverflowKey, token];
   NSLog(@"<%@>", url);
   
   AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -56,6 +58,45 @@ static NSString *const domain = @"com.mdaviscph.stackoverflowclient";
     completion(nil, error);
   }];
 }
+
++ (void)commentSearch:(NSString *)search completion:(void (^)(NSArray *, NSError *))completion {
+  
+  NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsTokenKey];
+  
+  NSString *url = [NSString stringWithFormat:kCommentSearch, search, kStackOverflowKey, token];
+  NSLog(@"<%@>", url);
+  
+  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+  
+  [manager GET:url parameters:nil
+   
+       success:^(AFHTTPRequestOperation* _Nonnull operation, id _Nonnull responseObject) {
+         
+         NSMutableArray *comments;
+         
+         NSDictionary *responseJSON = responseObject;
+         NSArray *itemsJSON = responseJSON[@"items"];
+         
+         if (itemsJSON) {
+           NSLog(@"Request success: %ld items", itemsJSON.count);
+           comments = [[NSMutableArray alloc] init];
+           for (NSDictionary *item in itemsJSON) {
+             Comment *comment = [Comment createUsingJSON:item];
+             if (comment) {
+               [comments addObject:comment];
+             }
+           }
+         }
+         completion(comments, nil);
+       }
+   
+       failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+         
+         NSLog(@"Request failure: %ld", operation.response.statusCode);
+         completion(nil, error);
+       }];
+}
+
 
 + (void)meSearchWithCompletion:(void (^)(User *, NSError *))completion {
   

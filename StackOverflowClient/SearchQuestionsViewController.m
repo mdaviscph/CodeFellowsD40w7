@@ -12,7 +12,7 @@
 #import "AlertPopover.h"
 #import "Constants.h"
 
-static NSString *kSearchError = @"Search Error";
+static NSString *kQuestionSearchError = @"Question Search Error";
 static NSString *kSearchImagesReturned = @"Images Returned";
 static NSString *const kQueueName = @"com.mdaviscph.stackoverflowclient.question_search";
 
@@ -121,7 +121,7 @@ static NSString *const kQueueName = @"com.mdaviscph.stackoverflowclient.question
       self.questions = results;       // this triggers a tableView reload
       
     } else {
-      NSString *errorTitle = NSLocalizedString(kSearchError, nil);
+      NSString *errorTitle = NSLocalizedString(kQuestionSearchError, nil);
       NSError *reachableError = [StackOverflowService reachableError];
       NSString *generalMessage = NSLocalizedString(@"An undefined error occurred. Please try again later.", nil);
       if (error) {
@@ -136,6 +136,7 @@ static NSString *const kQueueName = @"com.mdaviscph.stackoverflowclient.question
 }
 
 #pragma mark - UITableViewDataSource
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   return self.questions.count;
 }
@@ -144,7 +145,7 @@ static NSString *const kQueueName = @"com.mdaviscph.stackoverflowclient.question
   
   Question *question = self.questions[indexPath.row];
   cell.textLabel.text = question.title;
-  cell.detailTextLabel.text = question.displayName;
+  cell.detailTextLabel.text = [NSString stringWithFormat:@"%@  (%@)", question.displayName, question.userId];
   id object = self.profileImages[question.profileImageUrl];
   if (![object isEqual:[NSNull null]]) {
     cell.imageView.image = object;
@@ -153,15 +154,12 @@ static NSString *const kQueueName = @"com.mdaviscph.stackoverflowclient.question
 }
 
 #pragma mark - UITableViewDelegate
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  
-}
 
 #pragma mark - UISearchBarDelegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
   
   [self.searchBar resignFirstResponder];
-  self.titleSearchTerm = self.searchBar.text;
+  self.titleSearchTerm = self.searchBar.text;   // this triggers the search
 }
 
 @end

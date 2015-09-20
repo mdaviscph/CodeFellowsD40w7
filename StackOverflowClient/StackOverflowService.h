@@ -21,7 +21,9 @@ typedef enum StackOverflowErrors StackOverflowErrors;
 @interface StackOverflowService : NSObject
 
 + (void)questionSearch:(NSString *)search completion:(void (^)(NSArray *, NSError *))completion;
++ (void)commentSearch:(NSString *)search completion:(void (^)(NSArray *, NSError *))completion;
 + (void)meSearchWithCompletion:(void (^)(User *, NSError *))completion;
+  
 + (NSError *)reachableError;
 + (NSError *)convertStackOverflowError:(NSError *)soError;
 

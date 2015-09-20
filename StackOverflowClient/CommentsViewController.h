@@ -1,5 +1,5 @@
 //
-//  UserQuestionsViewController.h
+//  CommentsViewController.h
 //  StackOverflowClient
 //
 //  Created by mike davis on 9/15/15.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UserQuestionsViewController : UIViewController
+@interface CommentsViewController : UIViewController
+
+@property (strong, nonatomic) NSString *commentSearchTerm;
 
 @end

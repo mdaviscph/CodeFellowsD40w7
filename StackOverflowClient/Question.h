@@ -11,7 +11,7 @@
 @interface Question : NSObject
 
 @property (strong, nonatomic) NSString *title;
-@property (strong, nonatomic) NSString *owner;
+@property (strong, nonatomic) NSString *userId;
 @property (strong, nonatomic) NSString *displayName;
 @property (strong, nonatomic) NSString *profileImageUrl;
 

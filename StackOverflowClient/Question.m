@@ -13,12 +13,16 @@
 + (Question *)createUsingJSON:(NSDictionary *)jsonDictionary {
   
   Question *question = [[Question alloc] init];
+  
   question.title = jsonDictionary[@"title"];
+  
   NSDictionary *ownerDictionary = jsonDictionary[@"owner"];
   if (ownerDictionary) {
+    question.userId = [(NSNumber *)ownerDictionary[@"user_id"] stringValue];
     question.displayName = ownerDictionary[@"display_name"];
     question.profileImageUrl = ownerDictionary[@"profile_image"];
   }
   return question;
 }
+
 @end

@@ -9,7 +9,7 @@
 #import "BurgerMenuViewController.h"
 #import "SearchQuestionsViewController.h"
 #import "UserProfileViewController.h"
-#import "UserQuestionsViewController.h"
+#import "CommentsViewController.h"
 #import "WebViewController.h"
 #import "Constants.h"
 
@@ -18,7 +18,7 @@ static const CGFloat kBurgerButtonHeight = 50;
 static const NSTimeInterval kOpenAnimationDuration = 0.3;
 static const NSTimeInterval kCloseAnimationDuration = 0.4;
 static const NSTimeInterval kOffscreenAnimationDuration = 0.4;
-static const CGFloat kBurgerMenuOpenPercent = 0.60;
+static const CGFloat kBurgerMenuOpenPercent = 0.82;
 
 static NSString *const kKVOuserProfileUrl = @"profileImageUrl";
 
@@ -27,7 +27,7 @@ static NSString *const kKVOuserProfileUrl = @"profileImageUrl";
 @property (strong, nonatomic) UITableViewController *mainMenuVC;
 @property (strong, nonatomic) SearchQuestionsViewController *searchQuestionsVC;
 @property (strong, nonatomic) UserProfileViewController *userProfileVC;
-@property (strong, nonatomic) UserQuestionsViewController *userQuestionsVC;
+@property (strong, nonatomic) CommentsViewController *commentsVC;
 
 @property (strong, nonatomic) NSArray *menuItemVCs;
 @property (strong, nonatomic) UIViewController *topVC;
@@ -44,7 +44,7 @@ static NSString *const kKVOuserProfileUrl = @"profileImageUrl";
 - (NSArray *)menuItemVCs {
   if (!_menuItemVCs) {
     // order of VCs must match the order of cells for the static tableViewController in Storyboard
-    _menuItemVCs = @[self.searchQuestionsVC, self.userQuestionsVC, self.userProfileVC];
+    _menuItemVCs = @[self.searchQuestionsVC, self.commentsVC, self.userProfileVC];
   }
   return _menuItemVCs;
 }
@@ -69,11 +69,11 @@ static NSString *const kKVOuserProfileUrl = @"profileImageUrl";
   return _userProfileVC;
 }
 
-- (UserQuestionsViewController *)userQuestionsVC {
-  if (!_userQuestionsVC) {
-    _userQuestionsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"UserQuestionsVC"];
+- (CommentsViewController *)commentsVC {
+  if (!_commentsVC) {
+    _commentsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CommentsVC"];
   }
-  return _userQuestionsVC;
+  return _commentsVC;
 }
 
 - (UIButton *)burgerButton {
